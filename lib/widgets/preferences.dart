@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:easy_food/constants.dart' as constants;
 
 class Preference extends StatefulWidget {
-  final IconData icon;
+  final String imageName;
   final String title;
   const Preference({
     Key? key,
-    required this.icon,
+    required this.imageName,
     required this.title,
   }) : super(key: key);
 
@@ -29,9 +29,9 @@ class _PreferenceState extends State<Preference> {
                 onTap: () => setState(() {
                   preferencePressed = !preferencePressed;
                 }),
-                child: Icon(
-                  widget.icon,
-                  size: 45,
+                child: Image.asset(
+                  widget.imageName,
+                  scale: 1.5,
                 ),
               ),
               //

@@ -13,29 +13,25 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   List preference = [
     {
-      'icon': Icons.coffee_sharp,
+      'imageName': 'assets/icons/coffee.png',
       'title': 'Breakfast',
     },
     {
-      'icon': Icons.add,
-      'title': 'Ghana',
+      'imageName': 'assets/icons/beverage.png',
+      'title': 'Beverages',
     },
     {
-      'icon': Icons.clear,
-      'title': 'Nigeria',
+      'imageName': 'assets/icons/snack.png',
+      'title': 'Snacks',
     },
     {
-      'icon': Icons.remove,
-      'title': 'Guinea',
+      'imageName': 'assets/icons/pizza.png',
+      'title': 'Dessert',
     },
     {
-      'icon': Icons.local_fire_department_outlined,
-      'title': 'USA',
+      'imageName': 'assets/icons/soup.png',
+      'title': 'Soups',
     },
-    {
-      'icon': Icons.local_fire_department_outlined,
-      'title': 'Algeria',
-    }
   ];
 
   @override
@@ -81,19 +77,75 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: 135,
                       child: ListView.builder(
                           scrollDirection: Axis.horizontal,
-                          itemCount: 6,
+                          itemCount: 5,
                           itemBuilder: (BuildContext context, index) {
                             return Preference(
-                              icon: preference[index]['icon'],
+                              imageName: preference[index]['imageName'],
                               title: preference[index]['title'],
                             );
                           }),
                     ),
                   ),
                   Text(
-                    'Popular Recipes',
+                    'Breakfast',
                     style: constants.TextStyles.title.copyWith(fontSize: 30),
-                  )
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              child: Column(
+                                children: [
+                                  Container(
+                                    height: 10,
+                                    width: 40,
+                                    decoration: const BoxDecoration(
+                                      color: Colors.black54,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              height: 200,
+                              decoration: BoxDecoration(
+                                color: Colors.red,
+                                borderRadius: BorderRadius.circular(40),
+                              ),
+                            ),
+                            Text(
+                              'Garri',
+                              style: constants.TextStyles.title.copyWith(
+                                  fontSize: 24, fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              height: 200,
+                              decoration: BoxDecoration(
+                                color: Colors.red,
+                                borderRadius: BorderRadius.circular(40),
+                              ),
+                            ),
+                            Text(
+                              'Garri',
+                              style: constants.TextStyles.title.copyWith(
+                                  fontSize: 24, fontWeight: FontWeight.w100),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ],
