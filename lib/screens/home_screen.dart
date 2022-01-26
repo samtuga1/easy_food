@@ -2,6 +2,8 @@ import 'package:easy_food/widgets/search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_food/constants.dart' as constants;
 import 'package:easy_food/widgets/preferences.dart';
+import 'package:easy_food/widgets/food_container.dart';
+import 'package:easy_food/constants.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -11,29 +13,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List preference = [
-    {
-      'imageName': 'assets/icons/coffee.png',
-      'title': 'Breakfast',
-    },
-    {
-      'imageName': 'assets/icons/beverage.png',
-      'title': 'Beverages',
-    },
-    {
-      'imageName': 'assets/icons/snack.png',
-      'title': 'Snacks',
-    },
-    {
-      'imageName': 'assets/icons/pizza.png',
-      'title': 'Dessert',
-    },
-    {
-      'imageName': 'assets/icons/soup.png',
-      'title': 'Soups',
-    },
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -90,64 +69,26 @@ class _HomeScreenState extends State<HomeScreen> {
                     'Breakfast',
                     style: constants.TextStyles.title.copyWith(fontSize: 30),
                   ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              child: Column(
-                                children: [
-                                  Container(
-                                    height: 10,
-                                    width: 40,
-                                    decoration: const BoxDecoration(
-                                      color: Colors.black54,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              height: 200,
-                              decoration: BoxDecoration(
-                                color: Colors.red,
-                                borderRadius: BorderRadius.circular(40),
-                              ),
-                            ),
-                            Text(
-                              'Garri',
-                              style: constants.TextStyles.title.copyWith(
-                                  fontSize: 24, fontWeight: FontWeight.bold),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 20,
-                      ),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              height: 200,
-                              decoration: BoxDecoration(
-                                color: Colors.red,
-                                borderRadius: BorderRadius.circular(40),
-                              ),
-                            ),
-                            Text(
-                              'Garri',
-                              style: constants.TextStyles.title.copyWith(
-                                  fontSize: 24, fontWeight: FontWeight.w100),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
                 ],
               ),
+              const SizedBox(
+                height: 10,
+              ),
+              Expanded(
+                child: ListView.builder(
+                    itemCount: 6 ~/ 2,
+                    itemBuilder: (BuildContext context, index) {
+                      return Row(
+                        children: const [
+                          FoodContainer(),
+                          SizedBox(
+                            width: 15,
+                          ),
+                          FoodContainer()
+                        ],
+                      );
+                    }),
+              )
             ],
           ),
         ),
