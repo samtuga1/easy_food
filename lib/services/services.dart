@@ -3,14 +3,18 @@ import 'package:http/http.dart' as http;
 
 class Services {
   final String apiKey = 'b071243df8c9405ca7e7022e4b0257fa';
-  Future getRandomBreakfast() async {
+  static const int numberOfFood = 50;
+  List<String> foodNameList = [];
+  getRandomBreakfast() async {
     http.Response response = await http.get(
       Uri.parse(
-          'https://api.spoonacular.com/recipes/random?apiKey=b071243df8c9405ca7e7022e4b0257fa&number=1&tags=breakfast?'),
+          'https://api.spoonacular.com/recipes/random?apiKey=$apiKey&number=$numberOfFood&tags=breakfast?'),
     );
     dynamic foodData = response.body;
-    print(foodData);
-    // var data = json.decode(foodData['recipes'][0]['title']); //recipes[0].title
-    // print(data);
+    Map data = json.decode(foodData);
+    for (int i = 0; i < numberOfFood; i++) {
+      String foodName = (data['recipes'][i]['title']);
+      foodNameList.add(foodName);
+    }
   }
 }

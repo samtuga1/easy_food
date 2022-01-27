@@ -4,8 +4,10 @@ import 'package:easy_food/constants.dart' as constants;
 import 'package:easy_food/widgets/sub_containers.dart';
 
 class FoodContainer extends StatelessWidget {
+  final String foodLabel;
   const FoodContainer({
     Key? key,
+    required this.foodLabel,
   }) : super(key: key);
 
   @override
@@ -69,7 +71,7 @@ class FoodContainer extends StatelessWidget {
           ),
         ),
         Text(
-          'Garri',
+          foodLabel,
           style: constants.TextStyles.title
               .copyWith(fontSize: 24, fontWeight: FontWeight.bold),
         ),

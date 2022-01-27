@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:easy_food/widgets/search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_food/constants.dart' as constants;
@@ -17,8 +15,13 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    // TODO: implement initState
     Services().getRandomBreakfast();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -102,14 +105,15 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               Expanded(
                 child: GridView.builder(
-                  itemCount: 6,
+                  itemCount: Services.numberOfFood,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     crossAxisSpacing: 10,
                     childAspectRatio: 0.7,
                   ),
                   itemBuilder: (context, index) {
-                    return const FoodContainer();
+                    return FoodContainer(
+                        foodLabel: Services().foodNameList[index]);
                   },
                 ),
               ),
