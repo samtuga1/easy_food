@@ -13,14 +13,17 @@ class FoodContainer extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Ink(
-            height: 200,
-            decoration: BoxDecoration(
-              color: Colors.red,
-              borderRadius: BorderRadius.circular(40),
-            ),
-            child: InkWell(
-              onTap: () {},
+          InkWell(
+            borderRadius: BorderRadius.circular(40),
+            onTap: () {},
+            child: Container(
+              height: 200,
+              decoration: BoxDecoration(
+                image: const DecorationImage(
+                  image: AssetImage('assets/icons/pizza.png'),
+                ),
+                borderRadius: BorderRadius.circular(40),
+              ),
               child: Column(
                 children: [
                   Align(
@@ -68,6 +71,9 @@ class FoodContainer extends StatelessWidget {
             'Garri',
             style: constants.TextStyles.title
                 .copyWith(fontSize: 24, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(
+            height: 20,
           ),
         ],
       ),
