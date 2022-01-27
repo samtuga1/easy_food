@@ -4,10 +4,14 @@ import 'package:easy_food/constants.dart' as constants;
 class Preference extends StatefulWidget {
   final String imageName;
   final String title;
+  final Function() onPressed;
+  final bool preferenceColor;
   const Preference({
     Key? key,
     required this.imageName,
     required this.title,
+    required this.onPressed,
+    required this.preferenceColor,
   }) : super(key: key);
 
   @override
@@ -15,8 +19,6 @@ class Preference extends StatefulWidget {
 }
 
 class _PreferenceState extends State<Preference> {
-  bool preferencePressed = false;
-
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -26,9 +28,7 @@ class _PreferenceState extends State<Preference> {
             Ink(
               child: InkWell(
                 borderRadius: BorderRadius.circular(40),
-                onTap: () => setState(() {
-                  preferencePressed = !preferencePressed;
-                }),
+                onTap: widget.onPressed,
                 child: Image.asset(
                   widget.imageName,
                   scale: 1.5,
@@ -38,7 +38,7 @@ class _PreferenceState extends State<Preference> {
               width: 80,
               height: 100,
               decoration: BoxDecoration(
-                color: preferencePressed == false
+                color: widget.preferenceColor == false
                     ? const Color(0xFFf5f5f5)
                     : Colors.yellow, //,
                 borderRadius: BorderRadius.circular(40),

@@ -63,6 +63,27 @@ class _HomeScreenState extends State<HomeScreen> {
                             return Preference(
                               imageName: preference[index]['imageName'],
                               title: preference[index]['title'],
+                              onPressed: () {
+                                setState(() {
+                                  constants.preference[index]
+                                      [index] = !constants
+                                          .preference[index][
+                                      index]; //uses boolean operator to change color
+                                  for (var element in constants.preference) {
+                                    //Below is the code to set other preferences to the initial colour rather than yellow
+                                    if (element['number'] != index) {
+                                      for (var i = 1;
+                                          i < constants.preference.length;
+                                          i++) {
+                                        element[index - i] = false;
+                                        element[index + i] = false;
+                                      }
+                                    }
+                                  }
+                                });
+                              },
+                              preferenceColor: constants.preference[index]
+                                  [index],
                             );
                           }),
                     ),
@@ -80,10 +101,9 @@ class _HomeScreenState extends State<HomeScreen> {
               Expanded(
                 child: GridView.builder(
                   itemCount: 6,
-                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                    maxCrossAxisExtent: 200,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
                     crossAxisSpacing: 10,
-                    //mainAxisSpacing: 10,
                     childAspectRatio: 0.7,
                   ),
                   itemBuilder: (context, index) {
