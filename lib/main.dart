@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'screens/home_screen.dart';
 
 void main() {
-  runApp(const MaterialApp(
-    home: FoodScreen(), //initial route
+  runApp(MaterialApp(
+    home: const HomeScreen(),
+    routes: {
+      FoodScreen.id: (context) => const FoodScreen(),
+    }, //initial route
   ));
 }

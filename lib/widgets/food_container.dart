@@ -1,3 +1,4 @@
+import 'package:easy_food/screens/food_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_food/constants.dart' as constants;
 import 'package:easy_food/widgets/sub_containers.dart';
@@ -14,7 +15,7 @@ class FoodContainer extends StatelessWidget {
       children: [
         InkWell(
           borderRadius: BorderRadius.circular(40),
-          onTap: () {},
+          onTap: () => Navigator.pushNamed(context, FoodScreen.id),
           child: Container(
             height: 200,
             decoration: BoxDecoration(

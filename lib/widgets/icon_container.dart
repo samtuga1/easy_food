@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 class IconContainer extends StatelessWidget {
   final IconData icon;
   final Color color;
+  final Function() onPressed;
   const IconContainer({
     Key? key,
     required this.icon,
     required this.color,
+    required this.onPressed,
   }) : super(key: key);
 
   @override
@@ -16,7 +18,7 @@ class IconContainer extends StatelessWidget {
       borderRadius: BorderRadius.circular(35),
       child: InkWell(
         borderRadius: BorderRadius.circular(35),
-        onTap: () {},
+        onTap: onPressed,
         child: Ink(
           height: 65,
           width: 65,

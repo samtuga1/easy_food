@@ -65,10 +65,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               title: preference[index]['title'],
                               onPressed: () {
                                 setState(() {
-                                  constants.preference[index]
-                                      [index] = !constants
-                                          .preference[index][
-                                      index]; //uses boolean operator to change color
+                                  constants.preference[index][index] =
+                                      true; //uses boolean operator to change color
                                   for (var element in constants.preference) {
                                     //Below is the code to set other preferences to the initial colour rather than yellow
                                     if (element['number'] != index) {

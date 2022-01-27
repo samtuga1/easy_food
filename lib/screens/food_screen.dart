@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:easy_food/widgets/food_information.dart';
 
 class FoodScreen extends StatefulWidget {
+  static String id = 'food_screen.dart';
   const FoodScreen({Key? key}) : super(key: key);
 
   @override
@@ -26,19 +27,22 @@ class _FoodScreenState extends State<FoodScreen> {
                 alignment: Alignment.topCenter,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
+                  children: [
                     Padding(
-                      padding: EdgeInsets.only(left: 15.0, top: 2),
+                      padding: const EdgeInsets.only(left: 15.0, top: 2),
                       child: IconContainer(
-                        color: Colors.yellow,
-                        icon: Icons.arrow_back_ios_outlined,
-                      ),
+                          color: Colors.yellow,
+                          icon: Icons.arrow_back_ios_outlined,
+                          onPressed: () => Navigator.pop(context)),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(right: 15.0, top: 2),
+                      padding: const EdgeInsets.only(right: 15.0, top: 2),
                       child: IconContainer(
-                        color: Color(0xFFf5f5f5),
+                        color: const Color(0xFFf5f5f5),
                         icon: Icons.bookmark_border,
+                        onPressed: () {
+                          print('Bookmark pressed');
+                        },
                       ),
                     ),
                   ],
