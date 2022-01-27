@@ -18,6 +18,7 @@ class FoodContainer extends StatelessWidget {
           child: Container(
             height: 200,
             decoration: BoxDecoration(
+              color: Colors.red,
               image: const DecorationImage(
                 image: AssetImage('assets/icons/pizza.png'),
               ),

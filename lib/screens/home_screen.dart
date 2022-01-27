@@ -81,7 +81,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: GridView.builder(
                   itemCount: 6,
                   gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                    maxCrossAxisExtent: 150,
+                    maxCrossAxisExtent: 200,
+                    crossAxisSpacing: 10,
+                    //mainAxisSpacing: 10,
+                    childAspectRatio: 0.7,
                   ),
                   itemBuilder: (context, index) {
                     return const FoodContainer();
