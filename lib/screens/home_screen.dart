@@ -46,10 +46,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ],
                   ),
+                  //This container manages the search bar
                   Container(
                     margin: const EdgeInsets.only(top: 30),
                     child: const SearchBar(),
                   ),
+                  //This container manages the preferences
                   Container(
                     margin: const EdgeInsets.symmetric(vertical: 30.0),
                     child: SizedBox(
@@ -65,6 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           }),
                     ),
                   ),
+                  //A text to display the label of the preference
                   Text(
                     'Breakfast',
                     style: constants.TextStyles.title.copyWith(fontSize: 30),
@@ -75,20 +78,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 10,
               ),
               Expanded(
-                child: ListView.builder(
-                    itemCount: 6 ~/ 2,
-                    itemBuilder: (BuildContext context, index) {
-                      return Row(
-                        children: const [
-                          FoodContainer(),
-                          SizedBox(
-                            width: 15,
-                          ),
-                          FoodContainer()
-                        ],
-                      );
-                    }),
-              )
+                child: GridView.builder(
+                  itemCount: 6,
+                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                    maxCrossAxisExtent: 150,
+                  ),
+                  itemBuilder: (context, index) {
+                    return const FoodContainer();
+                  },
+                ),
+              ),
             ],
           ),
         ),
