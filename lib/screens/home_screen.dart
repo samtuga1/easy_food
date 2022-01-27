@@ -1,9 +1,12 @@
+import 'dart:developer';
+
 import 'package:easy_food/widgets/search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_food/constants.dart' as constants;
 import 'package:easy_food/widgets/preferences.dart';
 import 'package:easy_food/widgets/food_container.dart';
 import 'package:easy_food/constants.dart';
+import 'package:easy_food/services/services.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -15,6 +18,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    Services().getRandomBreakfast();
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
