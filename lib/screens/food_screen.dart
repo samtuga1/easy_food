@@ -7,7 +7,9 @@ import 'package:easy_food/widgets/food_information.dart';
 
 class FoodScreen extends StatefulWidget {
   static String id = 'food_screen.dart';
-  const FoodScreen({Key? key}) : super(key: key);
+  final String? foodName;
+  final String? image;
+  const FoodScreen({Key? key, this.image, this.foodName}) : super(key: key);
 
   @override
   _FoodScreenState createState() => _FoodScreenState();
@@ -22,7 +24,10 @@ class _FoodScreenState extends State<FoodScreen> {
         child: Stack(
           children: [
             Container(
-              color: Colors.blue,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: NetworkImage(widget.image.toString()),
+                      fit: BoxFit.cover)),
               child: Align(
                 alignment: Alignment.topCenter,
                 child: Row(
@@ -69,7 +74,7 @@ class _FoodScreenState extends State<FoodScreen> {
                         children: [
                           Expanded(
                             child: Text(
-                              'Fufu with palm nut soup',
+                              widget.foodName.toString(),
                               textAlign: TextAlign.start,
                               style: constants.TextStyles.title
                                   .copyWith(fontSize: 25),

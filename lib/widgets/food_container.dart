@@ -4,10 +4,16 @@ import 'package:easy_food/constants.dart' as constants;
 import 'package:easy_food/widgets/sub_containers.dart';
 
 class FoodContainer extends StatelessWidget {
+  final Function() onPressed;
+  final int time;
+  final String foodImage;
   final String foodLabel;
   const FoodContainer({
     Key? key,
     required this.foodLabel,
+    required this.foodImage,
+    required this.time,
+    required this.onPressed,
   }) : super(key: key);
 
   @override
@@ -17,14 +23,12 @@ class FoodContainer extends StatelessWidget {
       children: [
         InkWell(
           borderRadius: BorderRadius.circular(40),
-          onTap: () => Navigator.pushNamed(context, FoodScreen.id),
+          onTap: onPressed,
           child: Container(
             height: 200,
             decoration: BoxDecoration(
-              color: Colors.red,
-              image: const DecorationImage(
-                image: AssetImage('assets/icons/pizza.png'),
-              ),
+              image: DecorationImage(
+                  image: NetworkImage(foodImage), fit: BoxFit.cover),
               borderRadius: BorderRadius.circular(40),
             ),
             child: Column(
@@ -39,8 +43,8 @@ class FoodContainer extends StatelessWidget {
                     child: SubContainer(
                       icon: Icons.timer,
                       width: 90,
-                      color: Colors.black38.withOpacity(0.4),
-                      label: '15 mins',
+                      color: Colors.black38.withOpacity(0.6),
+                      label: '$time mins',
                       iconColor: Colors.white,
                       style: constants.TextStyles.subTitle.copyWith(
                         color: Colors.white,
@@ -70,10 +74,12 @@ class FoodContainer extends StatelessWidget {
             ),
           ),
         ),
-        Text(
-          foodLabel,
-          style: constants.TextStyles.title
-              .copyWith(fontSize: 24, fontWeight: FontWeight.bold),
+        Expanded(
+          child: Text(
+            foodLabel,
+            style: constants.TextStyles.title
+                .copyWith(fontSize: 24, fontWeight: FontWeight.bold),
+          ),
         ),
         const SizedBox(
           height: 20,

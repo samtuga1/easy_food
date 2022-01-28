@@ -1,3 +1,4 @@
+import 'package:easy_food/screens/food_screen.dart';
 import 'package:easy_food/widgets/search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_food/constants.dart' as constants;
@@ -15,13 +16,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
-  void initState() {
-    // TODO: implement initState
-    Services().getRandomBreakfast();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    BreakfastServices().getRandomBreakfast();
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -104,16 +100,42 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 10,
               ),
               Expanded(
-                child: GridView.builder(
-                  itemCount: Services.numberOfFood,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 10,
-                    childAspectRatio: 0.7,
-                  ),
-                  itemBuilder: (context, index) {
-                    return FoodContainer(
-                        foodLabel: Services().foodNameList[index]);
+                child: FutureBuilder(
+                  future: BreakfastServices().getRandomBreakfast(),
+                  builder: (context, dynamic snapshot) {
+                    List? recipes = snapshot.data[0];
+                    List? images = snapshot.data[1];
+                    List? foodDuration = snapshot.data[2];
+                    if (snapshot.hasData) {
+                      return GridView.builder(
+                        itemCount: BreakfastServices.numberOfFood,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 10,
+                          childAspectRatio: 0.52,
+                        ),
+                        itemBuilder: (context, index) {
+                          return FoodContainer(
+                              foodLabel: recipes![index],
+                              foodImage: '${images![index]}',
+                              time: foodDuration![index],
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => FoodScreen(
+                                          foodName: recipes[index],
+                                          image: '${images[index]}')),
+                                );
+                              });
+                        },
+                      );
+                    } else if (snapshot.hasError) {
+                      return const Text('Failed to Load');
+                    } else {
+                      return const Align(child: CircularProgressIndicator());
+                    }
                   },
                 ),
               ),
