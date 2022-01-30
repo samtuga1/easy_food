@@ -7,9 +7,25 @@ import 'package:easy_food/widgets/food_information.dart';
 
 class FoodScreen extends StatefulWidget {
   static String id = 'food_screen.dart';
+  final String? carbs;
+  final String? calories;
+  final String? fat;
+  final String? protein;
   final String? foodName;
   final String? image;
-  const FoodScreen({Key? key, this.image, this.foodName}) : super(key: key);
+  final int? foodTime;
+  final String? foodInstructions;
+  const FoodScreen(
+      {Key? key,
+      this.image,
+      this.foodName,
+      this.foodTime,
+      this.carbs,
+      this.calories,
+      this.fat,
+      this.protein,
+      this.foodInstructions})
+      : super(key: key);
 
   @override
   _FoodScreenState createState() => _FoodScreenState();
@@ -25,9 +41,11 @@ class _FoodScreenState extends State<FoodScreen> {
           children: [
             Container(
               decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: NetworkImage(widget.image.toString()),
-                      fit: BoxFit.cover)),
+                image: DecorationImage(
+                  image: NetworkImage(widget.image.toString()),
+                  fit: BoxFit.cover,
+                ),
+              ),
               child: Align(
                 alignment: Alignment.topCenter,
                 child: Row(
@@ -84,7 +102,7 @@ class _FoodScreenState extends State<FoodScreen> {
                             icon: Icons.timer,
                             width: 90,
                             color: Colors.yellow,
-                            label: '15 mins',
+                            label: '${widget.foodTime} mins',
                             iconColor: Colors.black,
                             style: constants.TextStyles.title.copyWith(
                               color: Colors.black,
@@ -100,16 +118,16 @@ class _FoodScreenState extends State<FoodScreen> {
                         child: Column(
                           children: [
                             Row(
-                              children: const [
+                              children: [
                                 FoodInfo(
                                   nutrientLabel: 'Carbs',
                                   nutrientIcon: 'assets/icons/carbohydrate.png',
-                                  nutrientAmount: 10,
+                                  nutrientAmount: widget.carbs,
                                 ),
                                 FoodInfo(
                                   nutrientLabel: 'Proteins',
                                   nutrientIcon: 'assets/icons/protein.png',
-                                  nutrientAmount: 20,
+                                  nutrientAmount: widget.protein,
                                 ),
                               ],
                             ),
@@ -117,16 +135,16 @@ class _FoodScreenState extends State<FoodScreen> {
                               height: 25,
                             ),
                             Row(
-                              children: const [
+                              children: [
                                 FoodInfo(
                                   nutrientLabel: 'Fats',
                                   nutrientIcon: 'assets/icons/pizza.png',
-                                  nutrientAmount: 10,
+                                  nutrientAmount: widget.fat,
                                 ),
                                 FoodInfo(
                                   nutrientLabel: 'Cal',
                                   nutrientIcon: 'assets/icons/calories.png',
-                                  nutrientAmount: 20,
+                                  nutrientAmount: widget.calories,
                                 ),
                               ],
                             ),
@@ -137,12 +155,14 @@ class _FoodScreenState extends State<FoodScreen> {
                         height: 30,
                       ),
                       Text(
-                        'Ingredients',
+                        'Instructions',
                         style:
                             constants.TextStyles.title.copyWith(fontSize: 25),
                       ),
-                      Column(
-                        children: constants.ingredientList,
+                      Text(
+                        widget.foodInstructions.toString(),
+                        style: constants.TextStyles.subTitle.copyWith(
+                            fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),

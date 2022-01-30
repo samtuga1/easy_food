@@ -32,7 +32,7 @@ class FoodInfo extends StatelessWidget {
           ),
           Expanded(
             child: Text(
-              '${nutrientAmount}g $nutrientLabel',
+              '$nutrientAmount $nutrientLabel',
               style: constants.TextStyles.subTitle.copyWith(
                   color: Colors.black,
                   fontSize: 18,

@@ -18,7 +18,7 @@ List preference = [
   {
     'imageName': 'assets/icons/coffee.png',
     'title': 'Breakfast',
-    'number': 0,
+    'index': 0,
     0: false,
   },
   {
@@ -47,32 +47,21 @@ List preference = [
   },
 ];
 
-List<ListTile> ingredientList = [
-  ListTile(
-    leading: MyBullet(),
-    title: Text(
-      '2 eggs',
-      style: TextStyles.ingredientsTextStyle,
-    ),
-  ),
-  ListTile(
-    leading: MyBullet(),
-    title: Text('5 spoons of water', style: TextStyles.ingredientsTextStyle),
-  ),
-  ListTile(
-    leading: MyBullet(),
-    title: Text('3 plates of gari', style: TextStyles.ingredientsTextStyle),
-  ),
-  ListTile(
-    leading: MyBullet(),
-    title: Text('3 spoons', style: TextStyles.ingredientsTextStyle),
-  ),
-  ListTile(
-    leading: MyBullet(),
-    title: Text('2 eggs', style: TextStyles.ingredientsTextStyle),
-  ),
-  ListTile(
-    leading: MyBullet(),
-    title: Text('2 eggs', style: TextStyles.ingredientsTextStyle),
-  ),
+List<double> foodRateList = [
+  3.2,
+  4.5,
+  2.4,
+  5,
+  2.4,
+  4.5,
+  3.2,
+  4.2,
+  1.9,
+  1.9,
+  4.4,
+  3.1,
+  3.5,
+  3.3,
+  4.1,
+  2.8
 ];

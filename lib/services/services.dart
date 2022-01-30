@@ -1,16 +1,27 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
+//This class will manage all networking services
 class BreakfastServices {
-  final String apiKey = '1ccfc3183728482f908ccb2e6d8e2fe6';
-  static const int numberOfFood = 20;
+  static String mealType = 'breakfast';
+  final String apiKey = 'e5d87cd1568e4012aeb33181a4d96850';
+  static const int numberOfFood = 2;
+  List<String> instructionsList = [];
   List<String> foodNameList = [];
   List<String> foodImageList = [];
   List<int> foodDurationList = [];
+  List<int> foodIdList = [];
+  List calories = [];
+  List fats = [];
+  List carbohydrates = [];
+  List proteins = [];
+
+  /*This class will manage all networking services which includes fetching of the data from the API and decoding
+  the JSON file that comes and then returning a list of data*/
   Future<List> getRandomBreakfast() async {
     http.Response response = await http.get(
       Uri.parse(
-          'https://api.spoonacular.com/recipes/random?apiKey=$apiKey&number=$numberOfFood&tags=breakfast?'),
+          'https://api.spoonacular.com/recipes/random?apiKey=$apiKey&number=$numberOfFood&tags=$mealType?'),
     );
     try {
       dynamic foodData = response.body;
@@ -18,15 +29,48 @@ class BreakfastServices {
       for (int i = 0; i < numberOfFood; i++) {
         String foodName = (data['recipes'][i]['title']);
         String foodImage = (data['recipes'][i]['image']);
-        int foodDuration =
-            (data['recipes'][i]['readyInMinutes']); //recipes[1].readyInMinutes
+        int foodDuration = (data['recipes'][i]['readyInMinutes']);
+        int foodId = (data['recipes'][i]['id']);
+        String instruction = (data['recipes'][i]['instructions']);
+        instructionsList.add(instruction);
         foodImageList.add(foodImage);
         foodNameList.add(foodName);
         foodDurationList.add(foodDuration);
+        foodIdList.add(foodId);
       }
     } catch (e) {
-      print(e);
+      //print(e);
     }
-    return [foodNameList, foodImageList, foodDurationList];
+    for (int id in foodIdList) {
+      http.Response response = await http.get(
+        Uri.parse(
+            'https://api.spoonacular.com/recipes/$id/nutritionWidget.json?apiKey=$apiKey'),
+      );
+      try {
+        dynamic foodData = response.body;
+        Map data = json.decode(foodData);
+        var foodCalories = data['calories'];
+        var foodCarbs = data['carbs'];
+        var foodFat = data['fat'];
+        var foodProtein = data['protein'];
+        calories.add(foodCalories);
+        carbohydrates.add(foodCarbs);
+        fats.add(foodFat);
+        proteins.add(foodProtein);
+      } catch (e) {
+        print(e);
+      }
+    }
+
+    return [
+      foodNameList,
+      foodImageList,
+      foodDurationList,
+      calories,
+      carbohydrates,
+      fats,
+      proteins,
+      instructionsList,
+    ];
   }
 }
