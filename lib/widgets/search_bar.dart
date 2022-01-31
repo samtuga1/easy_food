@@ -12,10 +12,13 @@ class SearchBar extends StatelessWidget {
       style: constants.TextStyles.subTitle,
       cursorColor: Colors.black54,
       decoration: InputDecoration(
-        prefixIcon: const Icon(
-          Icons.search,
-          color: Colors.black54,
-          size: 35,
+        suffixIcon: IconButton(
+          onPressed: () {},
+          icon: const Icon(
+            Icons.search,
+            color: Colors.black54,
+            size: 35,
+          ),
         ),
         hintText: 'Search any recipe',
         hintStyle: constants.TextStyles.subTitle
