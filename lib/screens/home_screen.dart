@@ -1,13 +1,13 @@
 import 'dart:math';
 
+import 'package:easy_food/screens/search_screen.dart';
 import 'package:easy_food/widgets/food_container.dart';
 import 'package:easy_food/widgets/search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_food/constants.dart' as constants;
 import 'package:easy_food/widgets/preferences.dart';
 import 'package:easy_food/constants.dart';
-import 'package:easy_food/services/services.dart';
-
+import 'package:easy_food/services/get_random_food_services.dart';
 import 'food_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -22,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   String mealType = 'Breakfast';
   bool showCircularIndicator = false;
 
-  putIndicatorOff() async {}
+  bool searchFoodPressed = false;
 
   @override
   Widget build(BuildContext context) {
@@ -36,11 +36,37 @@ class _HomeScreenState extends State<HomeScreen> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Make your own food,',
-                    style: constants.TextStyles.title.copyWith(
-                      fontSize: 30,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Make your own food,',
+                        style: constants.TextStyles.title.copyWith(
+                          fontSize: 30,
+                        ),
+                      ),
+                      Ink(
+                        height: 50,
+                        width: 50,
+                        decoration: BoxDecoration(
+                          color: Colors.yellow,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(10),
+                          onTap: () =>
+                              Navigator.pushNamed(context, SearchScreen.id),
+                          child: const Icon(
+                            Icons.search_sharp,
+                            size: 35,
+                          ),
+                        ),
+                      )
+                      // Container(
+                      //   margin: const EdgeInsets.only(top: 30),
+                      //   child: const SearchBar(),
+                      // ),
+                    ],
                   ),
                   Row(
                     children: [
@@ -58,10 +84,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                   //This container manages the search bar
-                  Container(
-                    margin: const EdgeInsets.only(top: 30),
-                    child: const SearchBar(),
-                  ),
                   //This container manages the preferences
                   Container(
                     margin: const EdgeInsets.symmetric(vertical: 30.0),
@@ -145,6 +167,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: FutureBuilder(
                 future: BreakfastServices().getRandomBreakfast(),
                 builder: (context, dynamic snapshot) {
+                  if (snapshot.hasData) {
                     List<String> recipeName = snapshot.data[0] ?? [];
                     List<String> images = snapshot.data[1] ?? [];
                     List<int> foodDuration = snapshot.data[2] ?? [];

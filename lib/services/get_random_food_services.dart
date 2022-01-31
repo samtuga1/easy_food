@@ -61,7 +61,6 @@ class BreakfastServices {
         print(e);
       }
     }
-
     return [
       foodNameList,
       foodImageList,
