@@ -1,9 +1,14 @@
+import 'dart:math';
+
+import 'package:easy_food/widgets/food_container.dart';
 import 'package:easy_food/widgets/search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_food/constants.dart' as constants;
 import 'package:easy_food/widgets/preferences.dart';
 import 'package:easy_food/constants.dart';
 import 'package:easy_food/services/services.dart';
+
+import 'food_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -13,7 +18,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  double foodRate = foodRateList[Random().nextInt(foodRateList.length)];
   String mealType = 'Breakfast';
+  bool showCircularIndicator = false;
+
+  putIndicatorOff() async {}
 
   @override
   Widget build(BuildContext context) {
@@ -70,23 +79,28 @@ class _HomeScreenState extends State<HomeScreen> {
                                   mealType = preference[index]['title'];
                                   if (constants.preference[index]['title'] ==
                                       'Breakfast') {
+                                    showCircularIndicator = true;
                                     BreakfastServices.mealType = 'breakfast';
                                   } else if (constants.preference[index]
                                           ['title'] ==
                                       'Drinks') {
                                     BreakfastServices.mealType = 'drink';
+                                    showCircularIndicator = true;
                                   } else if (constants.preference[index]
                                           ['title'] ==
                                       'Dessert') {
                                     BreakfastServices.mealType = 'dessert';
+                                    showCircularIndicator = true;
                                   } else if (constants.preference[index]
                                           ['title'] ==
                                       'Snacks') {
                                     BreakfastServices.mealType = 'snack';
+                                    showCircularIndicator = true;
                                   } else if (constants.preference[index]
                                           ['title'] ==
                                       'Soups') {
                                     BreakfastServices.mealType = 'soup';
+                                    showCircularIndicator = true;
                                   }
                                   constants.preference[index][index] =
                                       true; //uses boolean operator to change color
@@ -110,9 +124,17 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   //A text to display the label of the preference
-                  Text(
-                    mealType,
-                    style: constants.TextStyles.title.copyWith(fontSize: 30),
+                  Row(
+                    children: [
+                      Text(
+                        mealType,
+                        style:
+                            constants.TextStyles.title.copyWith(fontSize: 30),
+                      ),
+                      showCircularIndicator == false
+                          ? const Text('')
+                          : const CircularProgressIndicator()
+                    ],
                   ),
                 ],
               ),
@@ -120,8 +142,71 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 10,
               ),
               Expanded(
-                child: constants.loadFutureBuilder(),
-              ),
+                  child: FutureBuilder(
+                future: BreakfastServices().getRandomBreakfast(),
+                builder: (context, dynamic snapshot) {
+                    List<String> recipeName = snapshot.data[0] ?? [];
+                    List<String> images = snapshot.data[1] ?? [];
+                    List<int> foodDuration = snapshot.data[2] ?? [];
+                    List foodCalories = snapshot.data[3] ?? [];
+                    List foodCarbs = snapshot.data[4] ?? [];
+                    List foodFat = snapshot.data[5] ?? [];
+                    List foodProteins = snapshot.data[6] ?? [];
+                    List foodInstruction = snapshot.data[7] ?? [];
+                    return GridView.builder(
+                      itemCount: BreakfastServices.numberOfFood,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 10,
+                        childAspectRatio: 0.52,
+                      ),
+                      itemBuilder: (context, index) {
+                        return FoodContainer(
+                          foodLabel: recipeName[index],
+                          foodImage: images[index],
+                          time: foodDuration[index],
+                          foodRate: foodRate.toString(),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => FoodScreen(
+                                  foodName: recipeName[index],
+                                  image: images[index],
+                                  foodTime: foodDuration[index],
+                                  calories: foodCalories[index],
+                                  protein: foodProteins[index],
+                                  carbs: foodCarbs[index],
+                                  fat: foodFat[index],
+                                  foodInstructions: foodInstruction[index],
+                                ),
+                              ),
+                            );
+                          },
+                        );
+                      },
+                    );
+                  } else if (snapshot.hasError) {
+                    return Column(
+                      children: [
+                        Image.asset('assets/icons/error.png'),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          'I don\'t have enough money to buy a plan. I am using a free account so come back later lol😁',
+                          style: TextStyles.title,
+                        ),
+                      ],
+                    );
+                  } else {
+                    return const Align(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                },
+              )),
             ],
           ),
         ),

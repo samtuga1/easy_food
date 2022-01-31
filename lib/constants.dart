@@ -1,10 +1,4 @@
-import 'dart:math';
-import 'package:easy_food/screens/food_screen.dart';
-import 'package:easy_food/services/services.dart';
-import 'package:easy_food/widgets/food_container.dart';
 import 'package:flutter/material.dart';
-
-double foodRate = foodRateList[Random().nextInt(foodRateList.length)];
 
 class TextStyles {
   static TextStyle title = const TextStyle(fontFamily: 'GilroyBold');
@@ -70,71 +64,3 @@ List<double> foodRateList = [
   4.1,
   2.8
 ];
-
-FutureBuilder loadFutureBuilder() {
-  return FutureBuilder(
-    future: BreakfastServices().getRandomBreakfast(),
-    builder: (context, dynamic snapshot) {
-      if (snapshot.hasData) {
-        List<String> recipeName = snapshot.data[0] ?? [];
-        List<String> images = snapshot.data[1] ?? [];
-        List<int> foodDuration = snapshot.data[2] ?? [];
-        List foodCalories = snapshot.data[3] ?? [];
-        List foodCarbs = snapshot.data[4] ?? [];
-        List foodFat = snapshot.data[5] ?? [];
-        List foodProteins = snapshot.data[6] ?? [];
-        List foodInstruction = snapshot.data[7] ?? [];
-        return GridView.builder(
-          itemCount: BreakfastServices.numberOfFood,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            crossAxisSpacing: 10,
-            childAspectRatio: 0.52,
-          ),
-          itemBuilder: (context, index) {
-            return FoodContainer(
-              foodLabel: recipeName[index],
-              foodImage: images[index],
-              time: foodDuration[index],
-              foodRate: foodRate.toString(),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => FoodScreen(
-                      foodName: recipeName[index],
-                      image: images[index],
-                      foodTime: foodDuration[index],
-                      calories: foodCalories[index],
-                      protein: foodProteins[index],
-                      carbs: foodCarbs[index],
-                      fat: foodFat[index],
-                      foodInstructions: foodInstruction[index],
-                    ),
-                  ),
-                );
-              },
-            );
-          },
-        );
-      } else if (snapshot.hasError) {
-        return Column(
-          children: [
-            Image.asset('assets/icons/error.png'),
-            const SizedBox(
-              height: 10,
-            ),
-            Text(
-              'I don\'t have enough money to buy a plan. I am using a free account so come back later lol😁',
-              style: TextStyles.title,
-            ),
-          ],
-        );
-      } else {
-        return const Align(
-          child: CircularProgressIndicator(),
-        );
-      }
-    },
-  );
-}
