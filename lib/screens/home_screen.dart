@@ -18,7 +18,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  double foodRate = foodRateList[Random().nextInt(foodRateList.length)];
   String mealType = 'Breakfast';
   bool showCircularIndicator = false;
 
@@ -26,6 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    BreakfastServices().getRandomBreakfast();
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -189,7 +189,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           foodLabel: recipeName[index],
                           foodImage: images[index],
                           time: foodDuration[index],
-                          foodRate: foodRate.toString(),
                           onPressed: () {
                             Navigator.push(
                               context,

@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 //This class will manage all networking services
 class BreakfastServices {
   static String mealType = 'breakfast';
-  final String apiKey = 'b071243df8c9405ca7e7022e4b0257fa';
+  final String apiKey = '88ffe9b368b3407d9c45402a7c2e4b2e';
   static const int numberOfFood = 1;
   List<String> instructionsList = [];
   List<String> foodNameList = [];
@@ -19,11 +19,11 @@ class BreakfastServices {
   /*This class will manage all networking services which includes fetching of the data from the API and decoding
   the JSON file that comes and then returning a list of data*/
   Future<List> getRandomBreakfast() async {
-    http.Response response = await http.get(
-      Uri.parse(
-          'https://api.spoonacular.com/recipes/random?apiKey=$apiKey&number=$numberOfFood&tags=$mealType?'),
-    );
     try {
+      http.Response response = await http.get(
+        Uri.parse(
+            'https://api.spoonacular.com/recipes/random?apiKey=$apiKey&number=$numberOfFood&tags=$mealType?'),
+      );
       dynamic foodData = response.body;
       Map data = json.decode(foodData);
       for (int i = 0; i < numberOfFood; i++) {
@@ -39,7 +39,7 @@ class BreakfastServices {
         foodIdList.add(foodId);
       }
     } catch (e) {
-      //print(e);
+      print('not working');
     }
     for (int id in foodIdList) {
       http.Response response = await http.get(

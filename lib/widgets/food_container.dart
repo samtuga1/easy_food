@@ -4,7 +4,6 @@ import 'package:easy_food/constants.dart' as constants;
 import 'package:easy_food/widgets/sub_containers.dart';
 
 class FoodContainer extends StatelessWidget {
-  final String foodRate;
   final Function() onPressed;
   final int time;
   final String foodImage;
@@ -15,7 +14,6 @@ class FoodContainer extends StatelessWidget {
     required this.foodImage,
     required this.time,
     required this.onPressed,
-    required this.foodRate,
   }) : super(key: key);
 
   @override
@@ -57,21 +55,21 @@ class FoodContainer extends StatelessWidget {
                 const SizedBox(
                   height: 90,
                 ),
-                Align(
-                  alignment: Alignment.bottomRight,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: SubContainer(
-                      icon: Icons.star,
-                      width: 65,
-                      color: Colors.yellow,
-                      label: foodRate,
-                      style: constants.TextStyles.title
-                          .copyWith(color: Colors.black, fontSize: 18),
-                      iconColor: Colors.black,
-                    ),
-                  ),
-                ),
+                // Align(
+                //   alignment: Alignment.bottomRight,
+                //   child: Padding(
+                //     padding: const EdgeInsets.all(8.0),
+                //     child: SubContainer(
+                //       icon: Icons.star,
+                //       width: 65,
+                //       color: Colors.yellow,
+                //       label: foodRate,
+                //       style: constants.TextStyles.title
+                //           .copyWith(color: Colors.black, fontSize: 18),
+                //       iconColor: Colors.black,
+                //     ),
+                //   ),
+                // ),
               ],
             ),
           ),
