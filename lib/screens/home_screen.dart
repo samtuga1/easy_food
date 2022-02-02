@@ -170,12 +170,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   if (snapshot.hasData) {
                     List<String> recipeName = snapshot.data[0] ?? [];
                     List<String> images = snapshot.data[1] ?? [];
-                    List<int> foodDuration = snapshot.data[2] ?? [];
-                    List foodCalories = snapshot.data[3] ?? [];
-                    List foodCarbs = snapshot.data[4] ?? [];
-                    List foodFat = snapshot.data[5] ?? [];
-                    List foodProteins = snapshot.data[6] ?? [];
-                    List foodInstruction = snapshot.data[7] ?? [];
+                    List<int> foodDuration = snapshot.data[2] ?? [4];
+                    List foodCalories = snapshot.data[3] ?? [5];
+                    List foodCarbs = snapshot.data[4] ?? [5];
+                    List foodFat = snapshot.data[5] ?? [5];
+                    List foodProteins = snapshot.data[6] ?? [5];
+                    List foodInstruction = snapshot.data[7] ?? [5];
                     return GridView.builder(
                       itemCount: BreakfastServices.numberOfFood,
                       gridDelegate:

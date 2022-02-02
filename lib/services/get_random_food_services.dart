@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 //This class will manage all networking services
 class BreakfastServices {
   static String mealType = 'breakfast';
-  final String apiKey = '88ffe9b368b3407d9c45402a7c2e4b2e';
+  final String apiKey = 'f58ce4348de348309cb44741d2dd4569';
   static const int numberOfFood = 1;
   List<String> instructionsList = [];
   List<String> foodNameList = [];

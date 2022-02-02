@@ -2,7 +2,6 @@ import 'package:easy_food/services/get_searched_food_services.dart';
 import 'package:easy_food/widgets/food_container.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_food/widgets/search_bar.dart';
-
 import 'food_screen.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -79,7 +78,7 @@ class _SearchScreenState extends State<SearchScreen> {
               padding: EdgeInsets.only(top: 8.0, left: 15, right: 15),
               child: SearchBar(),
             ),
-            widget.showContent(),
+            textInBar == false ? Text('Search') : widget.showContent(),
           ],
         ),
       ),

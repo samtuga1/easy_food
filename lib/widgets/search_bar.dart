@@ -1,9 +1,11 @@
 import 'package:easy_food/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_food/constants.dart' as constants;
+import 'package:easy_food/services/get_searched_food_services.dart';
+
+bool textInBar = false;
 
 class SearchBar extends StatefulWidget {
-  static final textItem = TextEditingController();
   const SearchBar({
     Key? key,
   }) : super(key: key);
@@ -13,17 +15,19 @@ class SearchBar extends StatefulWidget {
 }
 
 class _SearchBarState extends State<SearchBar> {
+  final textItem = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return TextField(
-      controller: SearchBar.textItem,
+      controller: textItem,
       style: constants.TextStyles.subTitle,
       cursorColor: Colors.black54,
       decoration: InputDecoration(
         suffixIcon: IconButton(
           onPressed: () {
+            textInBar = true;
             setState(() {
-              const SearchScreen().showContent();
+              SearchFoodService.foodToBeSearched = textItem.text;
             });
           },
           icon: const Icon(

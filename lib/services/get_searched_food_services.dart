@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class SearchFoodService {
-  String foodToBeSearched = SearchBar.textItem.text;
+  static late String foodToBeSearched;
   late int foodTotalNumber;
   List foodIdSearchList = [];
   List foodNameList = [];
@@ -16,12 +16,12 @@ class SearchFoodService {
   List carbohydrates = [];
   List proteins = [];
 
-  final String apiKey = '88ffe9b368b3407d9c45402a7c2e4b2e';
+  final String apiKey = 'd7274524d9134e0caa80aa347e32791d';
   searchFood() async {
     try {
       http.Response response = await http.get(
         Uri.parse(
-            'https://api.spoonacular.com/recipes/complexSearch?apiKey=$apiKey&query=$foodToBeSearched'),
+            'https://api.spoonacular.com/recipes/complexSearch?apiKey=$apiKey&query=$foodToBeSearched&number=1'),
       );
       dynamic foodData = response.body;
       Map data = json.decode(foodData);
