@@ -20,7 +20,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   String mealType = 'Breakfast';
   bool showCircularIndicator = false;
-
   bool searchFoodPressed = false;
 
   @override

@@ -7,7 +7,7 @@ class FoodInfo extends StatelessWidget {
   final String nutrientLabel;
   const FoodInfo({
     Key? key,
-    this.nutrientAmount,
+    required this.nutrientAmount,
     required this.nutrientIcon,
     required this.nutrientLabel,
   }) : super(key: key);

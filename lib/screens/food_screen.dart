@@ -7,7 +7,7 @@ import 'package:easy_food/widgets/food_information.dart';
 
 class FoodScreen extends StatefulWidget {
   static String id = 'food_screen.dart';
-  final String? carbs;
+  final dynamic carbs;
   final String? calories;
   final String? fat;
   final String? protein;
