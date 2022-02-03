@@ -14,12 +14,12 @@ class SearchFoodService {
   List carbohydrates = [];
   List proteins = [];
 
-  final String apiKey = '322a3ecca6d44cfea816de71c7b0853a';
+  final String apiKey = 'b071243df8c9405ca7e7022e4b0257fa';
   searchFood(String foodToBeSearched) async {
     try {
       http.Response response = await http.get(
         Uri.parse(
-            'https://api.spoonacular.com/recipes/complexSearch?apiKey=$apiKey&query=$foodToBeSearched'),
+            'https://api.spoonacular.com/recipes/complexSearch?apiKey=$apiKey&query=$foodToBeSearched&number=1'),
       );
       dynamic foodData = response.body;
       Map data = json.decode(foodData);

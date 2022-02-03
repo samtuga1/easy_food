@@ -8,9 +8,9 @@ import 'package:easy_food/widgets/food_information.dart';
 class FoodScreen extends StatefulWidget {
   static String id = 'food_screen.dart';
   final dynamic carbs;
-  final String? calories;
-  final String? fat;
-  final String? protein;
+  final dynamic calories;
+  final dynamic fat;
+  final dynamic protein;
   final String? foodName;
   final String? image;
   final int? foodTime;
@@ -54,9 +54,10 @@ class _FoodScreenState extends State<FoodScreen> {
                     Padding(
                       padding: const EdgeInsets.only(left: 15.0, top: 2),
                       child: IconContainer(
-                          color: Colors.yellow,
-                          icon: Icons.arrow_back_ios_outlined,
-                          onPressed: () => Navigator.pop(context)),
+                        color: Colors.yellow,
+                        icon: Icons.arrow_back_ios_outlined,
+                        onPressed: () => Navigator.pop(context),
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(right: 15.0, top: 2),
