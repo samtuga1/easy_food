@@ -4,6 +4,11 @@ import 'package:flutter/material.dart';
 import 'food_screen.dart';
 import 'package:easy_food/constants.dart' as constants;
 
+late int number;
+late List names;
+late List image;
+late List duration;
+
 class SearchScreen extends StatefulWidget {
   static String id = 'search_screen';
   const SearchScreen({Key? key}) : super(key: key);
@@ -43,7 +48,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   ),
                   hintText: 'Search any recipe',
                   hintStyle: constants.TextStyles.title
-                      .copyWith(fontSize: 20, color: Colors.black),
+                      .copyWith(fontSize: 16, color: Colors.black),
                   fillColor: const Color(0xFFf2f2f2),
                   filled: true,
                   enabledBorder: OutlineInputBorder(
@@ -74,8 +79,11 @@ class _SearchScreenState extends State<SearchScreen> {
                       builder: (context, dynamic snapshot) {
                         if (snapshot.hasData) {
                           List recipeName = snapshot.data[0] ?? [];
+                          names = recipeName;
                           List images = snapshot.data[1] ?? [];
+                          image = images;
                           List foodDuration = snapshot.data[2] ?? [];
+                          duration = foodDuration;
                           List foodCalories = snapshot.data[3] ?? [];
                           List<dynamic> foodCarbs = snapshot.data[4] ?? [];
                           List foodFat = snapshot.data[5] ?? [];
@@ -89,6 +97,7 @@ class _SearchScreenState extends State<SearchScreen> {
                               childAspectRatio: 0.65,
                             ),
                             itemBuilder: (context, index) {
+                              number = index;
                               return FoodContainer(
                                 foodLabel: recipeName[index],
                                 foodImage: images[index],

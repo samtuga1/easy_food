@@ -1,3 +1,4 @@
+import 'package:easy_food/widgets/food_container.dart';
 import 'package:flutter/material.dart';
 
 class TextStyles {
@@ -45,3 +46,5 @@ List preference = [
     4: false,
   },
 ];
+
+List<FoodContainer> bookMarkList = [];

@@ -1,3 +1,5 @@
+import 'package:easy_food/screens/search_screen.dart';
+import 'package:easy_food/widgets/food_container.dart';
 import 'package:easy_food/widgets/sub_containers.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_food/widgets/icon_container.dart';
@@ -65,7 +67,13 @@ class _FoodScreenState extends State<FoodScreen> {
                         color: const Color(0xFFf5f5f5),
                         icon: Icons.bookmark_border,
                         onPressed: () {
-                          print('Bookmark pressed');
+                          constants.bookMarkList.add(
+                            FoodContainer(
+                              foodLabel: names[number],
+                              foodImage: image[number],
+                              time: duration[number],
+                            ),
+                          );
                         },
                       ),
                     ),

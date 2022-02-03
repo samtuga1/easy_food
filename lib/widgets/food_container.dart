@@ -4,7 +4,7 @@ import 'package:easy_food/constants.dart' as constants;
 import 'package:easy_food/widgets/sub_containers.dart';
 
 class FoodContainer extends StatelessWidget {
-  final Function() onPressed;
+  final Function()? onPressed;
   final int time;
   final String foodImage;
   final String foodLabel;
@@ -13,7 +13,7 @@ class FoodContainer extends StatelessWidget {
     required this.foodLabel,
     required this.foodImage,
     required this.time,
-    required this.onPressed,
+    this.onPressed,
   }) : super(key: key);
 
   @override

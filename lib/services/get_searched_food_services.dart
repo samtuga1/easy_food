@@ -14,7 +14,7 @@ class SearchFoodService {
   List carbohydrates = [];
   List proteins = [];
 
-  final String apiKey = 'b071243df8c9405ca7e7022e4b0257fa';
+  final String apiKey = '807f37f8da484fe583c370ee4856996f';
   searchFood(String foodToBeSearched) async {
     try {
       http.Response response = await http.get(
