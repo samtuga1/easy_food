@@ -118,7 +118,8 @@ class _SearchScreenState extends State<SearchScreen> {
                           return const Text('Error');
                         } else {
                           return const Align(
-                              child: CircularProgressIndicator());
+                            child: CircularProgressIndicator(),
+                          );
                         }
                       },
                     ),

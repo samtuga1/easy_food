@@ -24,6 +24,7 @@ class BreakfastServices {
         Uri.parse(
             'https://api.spoonacular.com/recipes/random?apiKey=$apiKey&number=$numberOfFood&tags=$mealType?'),
       );
+
       dynamic foodData = response.body;
       Map data = json.decode(foodData);
       for (int i = 0; i < numberOfFood; i++) {

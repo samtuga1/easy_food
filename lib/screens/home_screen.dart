@@ -1,8 +1,5 @@
-import 'dart:math';
-
 import 'package:easy_food/screens/search_screen.dart';
 import 'package:easy_food/widgets/food_container.dart';
-import 'package:easy_food/widgets/search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_food/constants.dart' as constants;
 import 'package:easy_food/widgets/preferences.dart';
@@ -19,7 +16,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   String mealType = 'Breakfast';
-  bool showCircularIndicator = false;
   bool searchFoodPressed = false;
 
   @override
@@ -61,10 +57,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                       )
-                      // Container(
-                      //   margin: const EdgeInsets.only(top: 30),
-                      //   child: const SearchBar(),
-                      // ),
                     ],
                   ),
                   Row(
@@ -100,28 +92,23 @@ class _HomeScreenState extends State<HomeScreen> {
                                   mealType = preference[index]['title'];
                                   if (constants.preference[index]['title'] ==
                                       'Breakfast') {
-                                    showCircularIndicator = true;
                                     BreakfastServices.mealType = 'breakfast';
                                   } else if (constants.preference[index]
                                           ['title'] ==
                                       'Drinks') {
                                     BreakfastServices.mealType = 'drink';
-                                    showCircularIndicator = true;
                                   } else if (constants.preference[index]
                                           ['title'] ==
                                       'Dessert') {
                                     BreakfastServices.mealType = 'dessert';
-                                    showCircularIndicator = true;
                                   } else if (constants.preference[index]
                                           ['title'] ==
                                       'Snacks') {
                                     BreakfastServices.mealType = 'snack';
-                                    showCircularIndicator = true;
                                   } else if (constants.preference[index]
                                           ['title'] ==
                                       'Soups') {
                                     BreakfastServices.mealType = 'soup';
-                                    showCircularIndicator = true;
                                   }
                                   constants.preference[index][index] =
                                       true; //uses boolean operator to change color
@@ -145,17 +132,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   //A text to display the label of the preference
-                  Row(
-                    children: [
-                      Text(
-                        mealType,
-                        style:
-                            constants.TextStyles.title.copyWith(fontSize: 30),
-                      ),
-                      showCircularIndicator == false
-                          ? const Text('')
-                          : const CircularProgressIndicator()
-                    ],
+                  Text(
+                    mealType,
+                    style: constants.TextStyles.title.copyWith(fontSize: 30),
                   ),
                 ],
               ),
@@ -214,10 +193,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         Image.asset('assets/icons/error.png'),
                         const SizedBox(
                           height: 10,
-                        ),
-                        Text(
-                          'I don\'t have enough money to buy a plan. I am using a free account so come back later lol😁',
-                          style: TextStyles.title,
                         ),
                       ],
                     );
