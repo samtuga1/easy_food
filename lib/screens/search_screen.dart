@@ -12,9 +12,9 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  bool textInBar = false;
+  bool _textInBar = false;
   String? _foodToBeSearched;
-  final textItem = TextEditingController();
+  final _textItem = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,15 +24,15 @@ class _SearchScreenState extends State<SearchScreen> {
             Padding(
               padding: const EdgeInsets.only(top: 8.0, left: 15, right: 15),
               child: TextField(
-                controller: textItem,
+                controller: _textItem,
                 style: constants.TextStyles.title,
                 cursorColor: Colors.black54,
                 decoration: InputDecoration(
                   suffixIcon: IconButton(
                     onPressed: () {
                       setState(() {
-                        textInBar = true;
-                        _foodToBeSearched = textItem.text;
+                        _textInBar = true;
+                        _foodToBeSearched = _textItem.text;
                       });
                     },
                     icon: const Icon(
@@ -61,7 +61,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 ),
               ),
             ),
-            textInBar == false
+            _textInBar == false
                 ? Expanded(
                     child: Image.asset(
                       'assets/icons/search.png',
