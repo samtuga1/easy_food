@@ -62,7 +62,11 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
             ),
             textInBar == false
-                ? const Text('Search')
+                ? Expanded(
+                    child: Image.asset(
+                      'assets/icons/search.png',
+                    ),
+                  )
                 : Expanded(
                     child: FutureBuilder(
                       future:
