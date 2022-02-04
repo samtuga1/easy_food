@@ -6,6 +6,8 @@ import 'package:easy_food/widgets/preferences.dart';
 import 'package:easy_food/constants.dart';
 import 'package:easy_food/services/get_random_food_services.dart';
 import 'food_screen.dart';
+import 'package:scroll_bottom_navigation_bar/scroll_bottom_navigation_bar.dart';
+import 'package:easy_food/screens/bookmark_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -17,6 +19,14 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   String mealType = 'Breakfast';
   bool searchFoodPressed = false;
+  final controller = ScrollController();
+  int selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -148,44 +158,51 @@ class _HomeScreenState extends State<HomeScreen> {
                   if (snapshot.hasData) {
                     List<String> recipeName = snapshot.data[0] ?? [];
                     List<String> images = snapshot.data[1] ?? [];
-                    List<int> foodDuration = snapshot.data[2] ?? [4];
-                    List foodCalories = snapshot.data[3] ?? [5];
-                    List foodCarbs = snapshot.data[4] ?? [5];
-                    List foodFat = snapshot.data[5] ?? [5];
-                    List foodProteins = snapshot.data[6] ?? [5];
-                    List foodInstruction = snapshot.data[7] ?? [5];
-                    return GridView.builder(
-                      itemCount: BreakfastServices.numberOfFood,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 10,
-                        childAspectRatio: 0.52,
-                      ),
-                      itemBuilder: (context, index) {
-                        return FoodContainer(
-                          foodLabel: recipeName[index],
-                          foodImage: images[index],
-                          time: foodDuration[index],
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => FoodScreen(
-                                  foodName: recipeName[index],
-                                  image: images[index],
-                                  foodTime: foodDuration[index],
-                                  calories: foodCalories[index],
-                                  protein: foodProteins[index],
-                                  carbs: foodCarbs[index],
-                                  fat: foodFat[index],
-                                  foodInstructions: foodInstruction[index],
+                    List<int> foodDuration = snapshot.data[2] ?? [];
+                    List foodCalories = snapshot.data[3] ?? [];
+                    List foodCarbs = snapshot.data[4] ?? [];
+                    List foodFat = snapshot.data[5] ?? [];
+                    List foodProteins = snapshot.data[6] ?? [];
+                    List foodInstruction = snapshot.data[7] ?? [];
+                    return ValueListenableBuilder(
+                      valueListenable:
+                          controller.bottomNavigationBar.tabNotifier,
+                      builder:
+                          (BuildContext context, int value, Widget? child) =>
+                              GridView.builder(
+                        controller: controller,
+                        itemCount: BreakfastServices.numberOfFood,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 10,
+                          childAspectRatio: 0.52,
+                        ),
+                        itemBuilder: (context, index) {
+                          return FoodContainer(
+                            foodLabel: recipeName[index],
+                            foodImage: images[index],
+                            time: foodDuration[index],
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => FoodScreen(
+                                    foodName: recipeName[index],
+                                    image: images[index],
+                                    foodTime: foodDuration[index],
+                                    calories: foodCalories[index],
+                                    protein: foodProteins[index],
+                                    carbs: foodCarbs[index],
+                                    fat: foodFat[index],
+                                    foodInstructions: foodInstruction[index],
+                                  ),
                                 ),
-                              ),
-                            );
-                          },
-                        );
-                      },
+                              );
+                            },
+                          );
+                        },
+                      ),
                     );
                   } else if (snapshot.hasError) {
                     return Column(
@@ -207,6 +224,18 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
+      bottomNavigationBar: ScrollBottomNavigationBar(
+          currentIndex: selectedIndex,
+          controller: controller,
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.bookmark_outlined), label: 'Favorites')
+          ],
+          onTap: _onItemTapped),
     );
   }
 }

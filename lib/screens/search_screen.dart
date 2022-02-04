@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'food_screen.dart';
 import 'package:easy_food/constants.dart' as constants;
 
-late int number;
 late List names;
 late List image;
 late List duration;
@@ -97,7 +96,6 @@ class _SearchScreenState extends State<SearchScreen> {
                               childAspectRatio: 0.65,
                             ),
                             itemBuilder: (context, index) {
-                              number = index;
                               return FoodContainer(
                                 foodLabel: recipeName[index],
                                 foodImage: images[index],

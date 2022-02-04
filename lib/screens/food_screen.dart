@@ -7,6 +7,8 @@ import 'package:easy_food/constants.dart' as constants;
 import 'package:flutter/widgets.dart';
 import 'package:easy_food/widgets/food_information.dart';
 
+import 'bookmark_screen.dart';
+
 class FoodScreen extends StatefulWidget {
   static String id = 'food_screen.dart';
   final dynamic carbs;
@@ -34,6 +36,7 @@ class FoodScreen extends StatefulWidget {
 }
 
 class _FoodScreenState extends State<FoodScreen> {
+  bool bookmarkPressed = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,14 +67,19 @@ class _FoodScreenState extends State<FoodScreen> {
                     Padding(
                       padding: const EdgeInsets.only(right: 15.0, top: 2),
                       child: IconContainer(
-                        color: const Color(0xFFf5f5f5),
+                        color: bookmarkPressed == false
+                            ? Color(0xFFf5f5f5)
+                            : Colors.yellow,
                         icon: Icons.bookmark_border,
                         onPressed: () {
+                          setState(() {
+                            bookmarkPressed = !bookmarkPressed;
+                          });
                           constants.bookMarkList.add(
                             FoodContainer(
-                              foodLabel: names[number],
-                              foodImage: image[number],
-                              time: duration[number],
+                              foodLabel: widget.foodName.toString(),
+                              foodImage: widget.image.toString(),
+                              time: widget.foodTime!,
                             ),
                           );
                         },
