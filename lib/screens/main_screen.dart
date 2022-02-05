@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:scroll_bottom_navigation_bar/scroll_bottom_navigation_bar.dart';
+import 'package:easy_food/constants.dart' as constants;
 
 import 'bookmark_screen.dart';
 import 'home_screen.dart';
@@ -12,7 +12,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  List pages = [const HomeScreen(), BookmarkScreen()];
+  List pages = [const HomeScreen(), const BookmarkScreen()];
   int selectedIndex = 0;
   final controller = ScrollController();
   void _onItemTapped(int index) {
@@ -25,18 +25,34 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: pages[selectedIndex],
-      bottomNavigationBar: ScrollBottomNavigationBar(
-          currentIndex: selectedIndex,
-          controller: controller,
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
+      bottomNavigationBar: BottomNavigationBar(
+        unselectedItemColor: Colors.grey,
+        showUnselectedLabels: true,
+        selectedLabelStyle: constants.TextStyles.title
+            .copyWith(color: Colors.black, fontSize: 15),
+        unselectedLabelStyle: constants.TextStyles.title.copyWith(fontSize: 15),
+        selectedItemColor: Colors.yellow[800],
+        type: BottomNavigationBarType.shifting,
+        backgroundColor: Colors.red,
+        currentIndex: selectedIndex,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.home,
+              size: 32,
             ),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.bookmark_outlined), label: 'Favorites')
-          ],
-          onTap: _onItemTapped),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.bookmark_outlined,
+              size: 32,
+            ),
+            label: 'Favorites',
+          )
+        ],
+        onTap: _onItemTapped,
+      ),
     );
   }
 }

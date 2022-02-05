@@ -68,7 +68,7 @@ class _FoodScreenState extends State<FoodScreen> {
                       padding: const EdgeInsets.only(right: 15.0, top: 2),
                       child: IconContainer(
                         color: bookmarkPressed == false
-                            ? Color(0xFFf5f5f5)
+                            ? const Color(0xFFf5f5f5)
                             : Colors.yellow,
                         icon: Icons.bookmark_border,
                         onPressed: () {

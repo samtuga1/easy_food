@@ -156,45 +156,39 @@ class _HomeScreenState extends State<HomeScreen> {
                     List foodFat = snapshot.data[5] ?? [];
                     List foodProteins = snapshot.data[6] ?? [];
                     List foodInstruction = snapshot.data[7] ?? [];
-                    return ValueListenableBuilder(
-                      valueListenable:
-                          controller.bottomNavigationBar.tabNotifier,
-                      builder:
-                          (BuildContext context, int value, Widget? child) =>
-                              GridView.builder(
-                        controller: controller,
-                        itemCount: BreakfastServices.numberOfFood,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 10,
-                          childAspectRatio: 0.52,
-                        ),
-                        itemBuilder: (context, index) {
-                          return FoodContainer(
-                            foodLabel: recipeName[index],
-                            foodImage: images[index],
-                            time: foodDuration[index],
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => FoodScreen(
-                                    foodName: recipeName[index],
-                                    image: images[index],
-                                    foodTime: foodDuration[index],
-                                    calories: foodCalories[index],
-                                    protein: foodProteins[index],
-                                    carbs: foodCarbs[index],
-                                    fat: foodFat[index],
-                                    foodInstructions: foodInstruction[index],
-                                  ),
-                                ),
-                              );
-                            },
-                          );
-                        },
+                    return GridView.builder(
+                      controller: controller,
+                      itemCount: BreakfastServices.numberOfFood,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 10,
+                        childAspectRatio: 0.52,
                       ),
+                      itemBuilder: (context, index) {
+                        return FoodContainer(
+                          foodLabel: recipeName[index],
+                          foodImage: images[index],
+                          time: foodDuration[index],
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => FoodScreen(
+                                  foodName: recipeName[index],
+                                  image: images[index],
+                                  foodTime: foodDuration[index],
+                                  calories: foodCalories[index],
+                                  protein: foodProteins[index],
+                                  carbs: foodCarbs[index],
+                                  fat: foodFat[index],
+                                  foodInstructions: foodInstruction[index],
+                                ),
+                              ),
+                            );
+                          },
+                        );
+                      },
                     );
                   } else if (snapshot.hasError) {
                     return Column(

@@ -4,8 +4,9 @@ import 'package:http/http.dart' as http;
 //This class will manage all networking services
 class BreakfastServices {
   static String mealType = 'breakfast';
-  final String apiKey = 'ab54bdcd0f694230b3cb4c469ae16f63';
-  static const int numberOfFood = 1;
+  final String apiKey1 = '0f33ebe71c364d11989456eb69a46a31 ';
+  final String apiKey2 = 'ab54bdcd0f694230b3cb4c469ae16f63 ';
+  static const int numberOfFood = 5;
   List<String> instructionsList = [];
   List<String> foodNameList = [];
   List<String> foodImageList = [];
@@ -22,7 +23,7 @@ class BreakfastServices {
     try {
       http.Response response = await http.get(
         Uri.parse(
-            'https://api.spoonacular.com/recipes/random?apiKey=$apiKey&number=$numberOfFood&tags=$mealType'),
+            'https://api.spoonacular.com/recipes/random?apiKey=$apiKey1&number=$numberOfFood&tags=$mealType'),
       );
 
       dynamic foodData = response.body;
@@ -45,7 +46,7 @@ class BreakfastServices {
     for (int id in foodIdList) {
       http.Response response = await http.get(
         Uri.parse(
-            'https://api.spoonacular.com/recipes/$id/nutritionWidget.json?apiKey=$apiKey'),
+            'https://api.spoonacular.com/recipes/$id/nutritionWidget.json?apiKey=$apiKey2'),
       );
       try {
         dynamic foodData = response.body;
