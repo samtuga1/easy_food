@@ -20,6 +20,3 @@ Get all the nutrients info such like proteins and calories, and also get the ins
 
 Finaly view your saved meals to your favorites 😎
 ![7](https://user-images.githubusercontent.com/79772304/152646072-c09b387e-6e12-494b-aadb-71257a3995e2.png)
-
-
-References - Got all the loaded meals with the wonderful API from https://spoonacular.com/food-api
