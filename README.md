@@ -1,7 +1,5 @@
 # easy_food
 
-Below are the final products for this project🍴🍖
-
 You can select any meal type🍩 you want to see
 ![1](https://user-images.githubusercontent.com/79772304/152646045-a3ffc16c-0e11-4606-9f17-52326fe9a7da.png)
 ![6](https://user-images.githubusercontent.com/79772304/152646140-49538364-9167-4d98-9cc3-8363aa9acb1a.png)
